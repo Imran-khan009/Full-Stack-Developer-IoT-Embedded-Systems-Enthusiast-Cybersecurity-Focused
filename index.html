@@ -13,8 +13,12 @@
   <link rel="preload" as="image" href="frames/frame_0001.webp" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="style.css?v=lock2">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+  </noscript>
+  <link rel="stylesheet" href="style.css?v=lock3">
   <style id="mobile-hero-lock">
     @media (max-width: 768px) {
       .hero-section {
@@ -359,6 +363,7 @@
 
         <!-- Right Visual Area: Glowing Halo Ring + Floating Glass Badges -->
         <div class="hero-right-visual">
+          <img id="hero-lcp-poster" class="hero-poster-img" src="frames/frame_0001.webp" alt="Imran Khan — IT &amp; Digital Solutions Professional" width="1280" height="720" fetchpriority="high" decoding="async">
           <canvas id="animation-canvas"></canvas>
 
           <!-- Cyber Glowing Halo Portal Ring -->

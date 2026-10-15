@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Imran Khan Portfolio — Interactive Canvas & UI Engine
  * Features:
  * - Chunked / Async 240-Frame Preload Engine (instant first 5 frames, streaming batches of 15 via requestIdleCallback)
@@ -67,7 +67,7 @@
 
   const loadQueue = []; // Unique queued frame indices
   const isMobileInitial = typeof window !== 'undefined' && window.innerWidth <= 768;
-  const MAX_CONCURRENT = isMobileInitial ? 8 : 12; // Fast parallel multiplexing
+  const MAX_CONCURRENT = isMobileInitial ? 2 : 3; // Smooth background streaming with zero network choking
   const MAX_CACHED_FRAMES = TOTAL_FRAMES; // Keep all 240 frames permanently in memory for 0ms lag-free recall
 
   let activeDownloads = 0;
@@ -250,26 +250,9 @@
     requestRender();
   }
 
-  // Multi-pass strided preloading: loads stride-4 keyframes first so all 360 degrees are ready in <300ms
+  // Instant Hero Paint: Only Frame 0 is downloaded upfront (lightweight 33KB WebP)
   function preloadInitialFrames() {
-    // 1. Initial paint frame
     enqueueFrame(0);
-
-    // 2. Pass 1: Stride 4 keyframes (0, 4, 8, 12 ... 236) -> full 360° coverage in ~300ms
-    for (let i = 4; i < TOTAL_FRAMES; i += 4) {
-      enqueueFrame(i);
-    }
-
-    // 3. Pass 2: Stride 2 intermediate frames (2, 6, 10 ... 238)
-    for (let i = 2; i < TOTAL_FRAMES; i += 4) {
-      enqueueFrame(i);
-    }
-
-    // 4. Pass 3: All remaining odd frames (1, 3, 5, 7 ... 239)
-    for (let i = 1; i < TOTAL_FRAMES; i += 2) {
-      enqueueFrame(i);
-    }
-
     processQueue();
   }
 
@@ -277,15 +260,40 @@
   function startDeferredFrameLoading() {
     if (isBackgroundLoadingStarted) return;
     isBackgroundLoadingStarted = true;
-    preloadInitialFrames();
-    processQueue();
+
+    // Stream remaining frames progressively during idle time without blocking UI or scroll
+    const scheduleBatch = () => {
+      // Pass 1: Stride 8 keyframes for lightweight 360 coverage
+      for (let i = 8; i < TOTAL_FRAMES; i += 8) {
+        enqueueFrame(i);
+      }
+      // Pass 2: Stride 4 intermediate keyframes
+      for (let i = 4; i < TOTAL_FRAMES; i += 8) {
+        enqueueFrame(i);
+      }
+      // Pass 3: Stride 2 intermediate frames
+      for (let i = 2; i < TOTAL_FRAMES; i += 4) {
+        enqueueFrame(i);
+      }
+      // Pass 4: All remaining frames
+      for (let i = 1; i < TOTAL_FRAMES; i += 2) {
+        enqueueFrame(i);
+      }
+      processQueue();
+    };
+
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(scheduleBatch, { timeout: 4000 });
+    } else {
+      setTimeout(scheduleBatch, 2500);
+    }
   }
 
   // Contiguous direction-aware lookahead buffer when user scrolls
   function ensureFramesAround(target) {
     const center = Math.round(target);
-    const lookahead = 14;
-    const lookbehind = 8;
+    const lookahead = 8;
+    const lookbehind = 4;
 
     if (scrollDirection >= 0) {
       for (let r = 0; r <= lookahead; r++) enqueueFrame(center + r);
@@ -1626,7 +1634,11 @@
     resizeCanvas();
     updateMaxScroll();
     // Keep network 100% idle during initial paint, start background frames on idle
-    setTimeout(startDeferredFrameLoading, 250);
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(startDeferredFrameLoading, { timeout: 4000 });
+    } else {
+      setTimeout(startDeferredFrameLoading, 3000);
+    }
   });
 
   window.addEventListener('orientationchange', () => {
