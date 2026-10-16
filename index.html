@@ -13,12 +13,8 @@
   <link rel="preload" as="image" href="frames/frame_0001.webp" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" media="print" onload="this.media='all'">
-  <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
-  </noscript>
-  <link rel="stylesheet" href="style.css?v=lock3">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="style.css?v=perf1">
   <style id="mobile-hero-lock">
     @media (max-width: 768px) {
       .hero-section {
@@ -63,7 +59,8 @@
       .hero-right-visual #animation-canvas,
       #animation-canvas,
       .hero-right-visual canvas,
-      .hero-right-visual img {
+      .hero-right-visual img,
+      .hero-poster-img {
         position: absolute !important;
         top: 50% !important;
         left: 50% !important;
@@ -77,12 +74,20 @@
         clip-path: none !important;
         border: none !important;
         box-shadow: none !important;
-        z-index: 2 !important;
         display: block !important;
         inset: auto !important;
         max-width: none !important;
         max-height: none !important;
         box-sizing: border-box !important;
+      }
+      .hero-right-visual img,
+      .hero-poster-img {
+        z-index: 1 !important;
+      }
+      .hero-right-visual #animation-canvas,
+      #animation-canvas,
+      .hero-right-visual canvas {
+        z-index: 2 !important;
       }
       .halo-portal-container {
         position: absolute !important;
@@ -194,6 +199,33 @@
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 10px !important;
         margin: 0 auto !important;
+      }
+      /* Accessibility Touch Target Enhancements (Minimum 44-48px) */
+      .capsule-tab-btn {
+        min-height: 44px !important;
+        padding: 8px 16px !important;
+      }
+      .card-specs-btn,
+      .media-btn-close {
+        min-height: 48px !important;
+        padding: 12px 18px !important;
+      }
+      .media-btn-github {
+        min-height: 48px !important;
+        padding: 12px 18px !important;
+      }
+      .experience-filter {
+        min-height: 44px !important;
+        padding: 10px 18px !important;
+        margin: 4px 2px !important;
+      }
+      .media-expand-badge {
+        min-height: 44px !important;
+        min-width: 44px !important;
+      }
+      .modal-close {
+        min-width: 48px !important;
+        min-height: 48px !important;
       }
     }
   </style>
@@ -852,7 +884,7 @@
 
           <!-- Media Viewer Container -->
           <div class="card-media-viewer" id="card-viewer-smart-irrigation">
-            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="smart-irrigation" title="Expand Full Diagram">
+            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="smart-irrigation" title="Expand Full Diagram" aria-label="Expand full diagram">
               <span>Click to Expand ↗</span>
             </button>
             <div class="card-tab-pane card-pane-diagram" id="card-pane-diagram-smart-irrigation">
@@ -893,7 +925,7 @@
 
           <!-- Media Viewer Container -->
           <div class="card-media-viewer" id="card-viewer-blind-stick">
-            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="blind-stick" title="Expand Full Diagram">
+            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="blind-stick" title="Expand Full Diagram" aria-label="Expand full diagram">
               <span>Click to Expand ↗</span>
             </button>
             <div class="card-tab-pane card-pane-diagram" id="card-pane-diagram-blind-stick">
@@ -934,7 +966,7 @@
 
           <!-- Media Viewer Container -->
           <div class="card-media-viewer" id="card-viewer-rc-robot-car">
-            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="rc-robot-car" title="Expand Full Diagram">
+            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="rc-robot-car" title="Expand Full Diagram" aria-label="Expand full diagram">
               <span>Click to Expand ↗</span>
             </button>
             <div class="card-tab-pane card-pane-diagram" id="card-pane-diagram-rc-robot-car">
@@ -973,7 +1005,7 @@
 
           <!-- Media Viewer Container -->
           <div class="card-media-viewer" id="card-viewer-home-automation">
-            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="home-automation" title="Expand Full Diagram">
+            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="home-automation" title="Expand Full Diagram" aria-label="Expand full diagram">
               <span>Click to Expand ↗</span>
             </button>
             <div class="card-tab-pane card-pane-diagram" id="card-pane-diagram-home-automation">
@@ -1014,7 +1046,7 @@
 
           <!-- Media Viewer Container -->
           <div class="card-media-viewer" id="card-viewer-flame-gas-detector">
-            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="flame-gas-detector" title="Expand Full Diagram">
+            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="flame-gas-detector" title="Expand Full Diagram" aria-label="Expand full diagram">
               <span>Click to Expand ↗</span>
             </button>
             <div class="card-tab-pane card-pane-diagram" id="card-pane-diagram-flame-gas-detector">
@@ -1053,7 +1085,7 @@
 
           <!-- Media Viewer Container -->
           <div class="card-media-viewer" id="card-viewer-radar-system">
-            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="radar-system" title="Expand Full Diagram">
+            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="radar-system" title="Expand Full Diagram" aria-label="Expand full diagram">
               <span>Click to Expand ↗</span>
             </button>
             <div class="card-tab-pane card-pane-diagram" id="card-pane-diagram-radar-system">
@@ -1094,7 +1126,7 @@
 
           <!-- Media Viewer Container -->
           <div class="card-media-viewer" id="card-viewer-obstacle-car">
-            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="obstacle-car" title="Expand Full Diagram">
+            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="obstacle-car" title="Expand Full Diagram" aria-label="Expand full diagram">
               <span>Click to Expand ↗</span>
             </button>
             <div class="card-tab-pane card-pane-diagram" id="card-pane-diagram-obstacle-car">
@@ -1140,7 +1172,7 @@
 
           <!-- Media Viewer Container -->
           <div class="card-media-viewer" id="card-viewer-modular-arduino-esp32">
-            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="modular-arduino-esp32" title="Expand Full Diagram">
+            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="modular-arduino-esp32" title="Expand Full Diagram" aria-label="Expand full diagram">
               <span>Click to Expand ↗</span>
             </button>
             <div class="card-tab-pane card-pane-diagram" id="card-pane-diagram-modular-arduino-esp32">
@@ -1181,7 +1213,7 @@
 
           <!-- Media Viewer Container -->
           <div class="card-media-viewer" id="card-viewer-custom-websites">
-            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="custom-websites" title="Expand Full Diagram">
+            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="custom-websites" title="Expand Full Diagram" aria-label="Expand full diagram">
               <span>Click to Expand ↗</span>
             </button>
             <div class="card-tab-pane card-pane-diagram" id="card-pane-diagram-custom-websites">
@@ -1232,7 +1264,7 @@
 
           <!-- Media Viewer Container -->
           <div class="card-media-viewer" id="card-viewer-portfolio-website">
-            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="portfolio-website" title="Expand Full Diagram">
+            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="portfolio-website" title="Expand Full Diagram" aria-label="Expand full diagram">
               <span>Click to Expand ↗</span>
             </button>
             <div class="card-tab-pane card-pane-diagram" id="card-pane-diagram-portfolio-website">
@@ -1282,7 +1314,7 @@
 
           <!-- Media Viewer Container -->
           <div class="card-media-viewer" id="card-viewer-verified-web-projects">
-            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="verified-web-projects" title="Expand Full Diagram">
+            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="verified-web-projects" title="Expand Full Diagram" aria-label="Expand full diagram">
               <span>Click to Expand ↗</span>
             </button>
             <div class="card-tab-pane card-pane-diagram" id="card-pane-diagram-verified-web-projects">
@@ -1321,7 +1353,7 @@
 
           <!-- Media Viewer Container -->
           <div class="card-media-viewer" id="card-viewer-resume-design">
-            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="resume-design" title="Expand Full Diagram">
+            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="resume-design" title="Expand Full Diagram" aria-label="Expand full diagram">
               <span>Click to Expand ↗</span>
             </button>
             <div class="card-tab-pane card-pane-diagram" id="card-pane-diagram-resume-design">
@@ -1371,7 +1403,7 @@
 
           <!-- Media Viewer Container -->
           <div class="card-media-viewer" id="card-viewer-graphic-design">
-            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="graphic-design" title="Expand Full Diagram">
+            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="graphic-design" title="Expand Full Diagram" aria-label="Expand full diagram">
               <span>Click to Expand ↗</span>
             </button>
             <div class="card-tab-pane card-pane-diagram" id="card-pane-diagram-graphic-design">
@@ -1410,7 +1442,7 @@
 
           <!-- Media Viewer Container -->
           <div class="card-media-viewer" id="card-viewer-video-editing">
-            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="video-editing" title="Expand Full Diagram">
+            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="video-editing" title="Expand Full Diagram" aria-label="Expand full diagram">
               <span>Click to Expand ↗</span>
             </button>
             <div class="card-tab-pane card-pane-diagram" id="card-pane-diagram-video-editing">
@@ -1451,7 +1483,7 @@
 
           <!-- Media Viewer Container -->
           <div class="card-media-viewer" id="card-viewer-digital-marketing">
-            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="digital-marketing" title="Expand Full Diagram">
+            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="digital-marketing" title="Expand Full Diagram" aria-label="Expand full diagram">
               <span>Click to Expand ↗</span>
             </button>
             <div class="card-tab-pane card-pane-diagram" id="card-pane-diagram-digital-marketing">
@@ -1501,7 +1533,7 @@
 
           <!-- Media Viewer Container -->
           <div class="card-media-viewer" id="card-viewer-ecommerce-projects">
-            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="ecommerce-projects" title="Expand Full Diagram">
+            <button type="button" class="media-expand-badge card-expand-btn" data-open-project="ecommerce-projects" title="Expand Full Diagram" aria-label="Expand full diagram">
               <span>Click to Expand ↗</span>
             </button>
             <div class="card-tab-pane card-pane-diagram" id="card-pane-diagram-ecommerce-projects">
@@ -1662,7 +1694,7 @@
 
           <!-- Media Viewer Container -->
           <div class="media-viewer-display" id="modal-viewer-display">
-            <a href="assets/water-management-circuit.png" target="_blank" rel="noopener noreferrer" class="media-expand-badge" id="modal-expand-badge" title="Open full diagram in new tab">
+            <a href="assets/water-management-circuit.png" target="_blank" rel="noopener noreferrer" class="media-expand-badge" id="modal-expand-badge" title="Open full diagram in new tab" aria-label="Open full diagram in new tab">
               <span>Click to Expand ↗</span>
             </a>
             <div class="media-tab-pane" id="modal-pane-diagram">
@@ -1712,7 +1744,7 @@
           <span class="modal-eyebrow">GET IN TOUCH</span>
           <h2 class="modal-title">Let's Build Something Great</h2>
         </div>
-        <button class="modal-close" id="connect-close">&times;</button>
+        <button class="modal-close" id="connect-close" aria-label="Close connect modal">&times;</button>
       </div>
       <div class="connect-info-list">
         <a href="mailto:s.engrimrantareen@gmail.com" class="connect-item">
