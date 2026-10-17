@@ -432,6 +432,12 @@
         orbitEl.style.setProperty('z-index', '4', 'important');
         orbitEl.style.setProperty('pointer-events', 'none', 'important');
       }
+    } else {
+      if (posterEl) posterEl.removeAttribute('style');
+      if (canvasEl) canvasEl.removeAttribute('style');
+      if (visualEl) visualEl.removeAttribute('style');
+      if (haloEl) haloEl.removeAttribute('style');
+      if (orbitEl) orbitEl.removeAttribute('style');
     }
   }
 
